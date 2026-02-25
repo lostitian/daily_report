@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A股创新高日报 - 历史报告</title>
+<style>
+:root {
+  --primary: #1a73e8;
+  --primary-light: #e8f0fe;
+  --bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --text: #202124;
+  --text-secondary: #5f6368;
+  --border: #dadce0;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --highlight: #e6f4ea;
+  --highlight-border: #34a853;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.nav button {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text);
+  transition: background 0.15s;
+}
+.nav button:hover {
+  background: var(--primary-light);
+}
+.nav .month-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.calendar {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.calendar .header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.calendar .header div {
+  text-align: center;
+  padding: 10px 0;
+}
+.calendar .body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.calendar .day {
+  text-align: center;
+  padding: 12px 4px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+.calendar .day.empty {
+  background: transparent;
+  border-top-color: transparent;
+}
+.calendar .day.has-report {
+  background: var(--highlight);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.calendar .day.has-report:hover {
+  background: var(--primary-light);
+}
+.calendar .day.has-report::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: var(--highlight-border);
+  border-radius: 50%;
+  margin: 4px auto 0;
+}
+.calendar .day.today {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.report-list {
+  list-style: none;
+}
+.report-list li {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  transition: background 0.15s;
+}
+.report-list li:hover {
+  background: var(--primary-light);
+}
+.report-list a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>A股创新高日报</h1>
+
+  <div class="nav">
+    <button id="prev-btn">&larr; 上月</button>
+    <span class="month-label" id="month-label"></span>
+    <button id="next-btn">下月 &rarr;</button>
+  </div>
+  <div class="calendar">
+    <div class="header">
+      <div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div>
+    </div>
+    <div class="body" id="cal-body"></div>
+  </div>
+
+  <h2>全部报告</h2>
+  <ul class="report-list" id="report-list"></ul>
+</div>
+
+<script>
+(function() {
+  var DATES = ["2026-02-25"];
+  var dateSet = {};
+  DATES.forEach(function(d) { dateSet[d] = true; });
+
+  var now = new Date();
+  var curYear = now.getFullYear();
+  var curMonth = now.getMonth(); // 0-based
+
+  // If there are reports, default to the month of the latest report
+  if (DATES.length > 0) {
+    var latest = DATES[DATES.length - 1].split("-");
+    curYear = parseInt(latest[0], 10);
+    curMonth = parseInt(latest[1], 10) - 1;
+  }
+
+  var todayStr = now.getFullYear() + "-" +
+    String(now.getMonth() + 1).padStart(2, "0") + "-" +
+    String(now.getDate()).padStart(2, "0");
+
+  function pad(n) { return String(n).padStart(2, "0"); }
+
+  function render() {
+    var label = curYear + " 年 " + (curMonth + 1) + " 月";
+    document.getElementById("month-label").textContent = label;
+
+    var first = new Date(curYear, curMonth, 1);
+    var dow = (first.getDay() + 6) % 7; // Monday=0
+    var daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+
+    var html = "";
+    // leading blanks
+    for (var i = 0; i < dow; i++) {
+      html += '<div class="day empty"></div>';
+    }
+    for (var d = 1; d <= daysInMonth; d++) {
+      var ds = curYear + "-" + pad(curMonth + 1) + "-" + pad(d);
+      var cls = "day";
+      if (dateSet[ds]) cls += " has-report";
+      if (ds === todayStr) cls += " today";
+      html += '<div class="' + cls + '" data-date="' + ds + '">' + d + '</div>';
+    }
+    document.getElementById("cal-body").innerHTML = html;
+  }
+
+  // Event delegation for calendar clicks
+  document.getElementById("cal-body").addEventListener("click", function(e) {
+    var el = e.target.closest(".has-report");
+    if (el) {
+      var d = el.getAttribute("data-date");
+      if (d) window.location.href = "reports/" + d + ".html";
+    }
+  });
+
+  document.getElementById("prev-btn").addEventListener("click", function() {
+    curMonth--;
+    if (curMonth < 0) { curMonth = 11; curYear--; }
+    render();
+  });
+  document.getElementById("next-btn").addEventListener("click", function() {
+    curMonth++;
+    if (curMonth > 11) { curMonth = 0; curYear++; }
+    render();
+  });
+
+  // Full report list (reverse chronological)
+  var listHtml = "";
+  for (var i = DATES.length - 1; i >= 0; i--) {
+    listHtml += '<li><a href="reports/' + DATES[i] + '.html">' + DATES[i] + '</a></li>';
+  }
+  document.getElementById("report-list").innerHTML = listHtml || '<li style="padding:12px 16px;color:#5f6368">暂无报告</li>';
+
+  render();
+})();
+</script>
+</body>
+</html>
