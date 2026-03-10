@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A股创新高日报 2026-03-10</title>
+<style>
+:root {
+  --bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --primary: #1a73e8;
+  --primary-light: #e8f0fe;
+  --text: #202124;
+  --text-secondary: #5f6368;
+  --border: #e0e0e0;
+  --accent-red: #d93025;
+  --accent-green: #188038;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+header .date {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+header .stat {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 15px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+}
+
+/* Market Summary */
+.summary-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+}
+
+.summary-card h2 {
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,0.4);
+  margin-bottom: 12px;
+}
+
+.summary-card p {
+  font-size: 15px;
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+/* Themes */
+.themes {
+  margin-bottom: 32px;
+}
+
+.theme-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary);
+}
+
+.theme-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.theme-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.theme-count {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.theme-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.theme-stocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-block;
+  background: #f1f3f4;
+  color: var(--text);
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 14px;
+}
+
+/* Signals */
+.signals-section {
+  margin-bottom: 32px;
+}
+
+.signal-card {
+  background: linear-gradient(135deg, #ff6b35 0%, #f7c948 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+  line-height: 1.6;
+}
+
+/* Theme strength */
+.strength-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.strength-strong { background: #188038; }
+.strength-medium { background: #f9ab00; }
+.strength-weak { background: #bdc1c6; }
+
+.theme-strength-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-left: auto;
+}
+
+/* Driver type tags */
+.driver-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.driver-performance { background: #188038; }
+.driver-tech { background: #1a73e8; }
+.driver-policy { background: #7b1fa2; }
+.driver-merger { background: #0097a7; }
+.driver-concept { background: #e65100; }
+.driver-capital { background: #d93025; }
+
+/* Logic score stars */
+.logic-score {
+  font-size: 14px;
+  color: #f9ab00;
+  letter-spacing: 1px;
+}
+
+/* Catalyst */
+.stock-catalyst {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: #fff3e0;
+  border-left: 3px solid #ff9800;
+  border-radius: 4px;
+}
+
+/* Expectation gap — high-visibility alert style */
+.stock-expectation-gap {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+  border-left: 4px solid #ab47bc;
+  border-radius: 6px;
+}
+
+/* Stock detail cards */
+.stocks-detail {
+  margin-bottom: 32px;
+}
+
+.stock-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.stock-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stock-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.stock-code {
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: #f1f3f4;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+}
+
+.stock-sector {
+  font-size: 13px;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: 6px;
+}
+
+.stock-reason {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  background: #fffde7;
+  border-radius: 6px;
+}
+
+.stock-news {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.stock-news ul {
+  margin: 4px 0 0 20px;
+  color: var(--text-secondary);
+}
+
+.stock-news li {
+  margin-bottom: 2px;
+}
+
+.stock-outlook {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  background: #f1f3f4;
+  border-radius: 6px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+}
+
+footer p {
+  font-size: 12px;
+  color: #9aa0a6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container { padding: 16px 12px; }
+  header h1 { font-size: 22px; }
+  .theme-card, .stock-card { padding: 14px 16px; }
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>A股创新高日报</h1>
+  <div class="date">2026-03-10</div>
+  <div class="stat">今日共 <strong>11</strong> 只股票创新高</div>
+</header>
+<section class="summary-card">
+  <h2>市场综述</h2>
+  <p>今日绝对主线是“AI算力基建的业绩兑现与纵深挖掘”。光通信、PCB、存储等方向以满分逻辑和扎实业绩领涨，属高确定性真主线；航改燃发电等属逻辑外溢的概念发酵。市场情绪呈“哑铃型”特征：进攻端重仓AI算力核心硬件的业绩兑现期，防守端抱团银行、港口等高股息破净股，纯题材炒作已被边缘化。</p>
+</section>
+<section class="signals-section">
+<h2>今日信号</h2>
+<div class="signal-card">AI算力炒作极度纵深：资金从核心光模块向底层交换芯片及解决缺电的航改燃发电延伸，产业链挖掘已达极致。</div>
+<div class="signal-card">业绩兑现成核心驱动：创新高科技股均交出亮眼业绩或强势扭亏答卷，题材炒作退潮，资金全面拥抱高景气度标的。</div>
+</section>
+<section class="themes">
+<h2>主题归类</h2>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-medium"></span>
+    <span class="theme-name">AI算力高速光通信</span>
+    <span class="theme-count">2只</span>
+    <span class="theme-strength-label">中</span>
+  </div>
+  <p class="theme-desc">AI大模型迭代拉动1.6T光模块及配套高速光芯片、CW光源规模量产，核心供应商迎来业绩高增兑现。</p>
+  <div class="theme-stocks"><span class="chip">光迅科技</span> <span class="chip">源杰科技</span></div>
+</div>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-weak"></span>
+    <span class="theme-name">AI企业级存储</span>
+    <span class="theme-count">1只</span>
+    <span class="theme-strength-label">弱</span>
+  </div>
+  <p class="theme-desc">AI服务器及端侧AI爆发带动大容量企业级SSD需求，叠加存储周期反转涨价，释放巨大业绩弹性。</p>
+  <div class="theme-stocks"><span class="chip">德明利</span></div>
+</div>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-weak"></span>
+    <span class="theme-name">AI服务器PCB</span>
+    <span class="theme-count">1只</span>
+    <span class="theme-strength-label">弱</span>
+  </div>
+  <p class="theme-desc">全球AI服务器资本开支高企拉动高频高速及HDI板需求，优化产品结构并大幅拉升毛利率。</p>
+  <div class="theme-stocks"><span class="chip">广合科技</span></div>
+</div>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-weak"></span>
+    <span class="theme-name">饲料级维生素</span>
+    <span class="theme-count">1只</span>
+    <span class="theme-strength-label">弱</span>
+  </div>
+  <p class="theme-desc">环保趋严及海外复产不及预期导致供给收缩，出口报价上调直接增厚利润，实现量价齐升。</p>
+  <div class="theme-stocks"><span class="chip">新和成</span></div>
+</div>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-medium"></span>
+    <span class="theme-name">高股息破净银行</span>
+    <span class="theme-count">2只</span>
+    <span class="theme-strength-label">中</span>
+  </div>
+  <p class="theme-desc">市值管理新规落地催化长期破净股估值修复，叠加绝对高股息率在低利率环境下吸引避险资金配置。</p>
+  <div class="theme-stocks"><span class="chip">成都银行</span> <span class="chip">华夏银行</span></div>
+</div>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-weak"></span>
+    <span class="theme-name">固态电池核心设备</span>
+    <span class="theme-count">1只</span>
+    <span class="theme-strength-label">弱</span>
+  </div>
+  <p class="theme-desc">通过并购重组向固态电池整线装备延伸，构建硫化物电解质材料与底层设备的垂直整合护城河。</p>
+  <div class="theme-stocks"><span class="chip">恩捷股份</span></div>
+</div>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-weak"></span>
+    <span class="theme-name">高股息港口物流</span>
+    <span class="theme-count">1只</span>
+    <span class="theme-strength-label">弱</span>
+  </div>
+  <p class="theme-desc">外贸进出口景气度回升带动集装箱吞吐量双位数增长，盈利中枢上移凸显红利资产防御价值。</p>
+  <div class="theme-stocks"><span class="chip">宁波港</span></div>
+</div>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-weak"></span>
+    <span class="theme-name">AI算力交换芯片</span>
+    <span class="theme-count">1只</span>
+    <span class="theme-strength-label">弱</span>
+  </div>
+  <p class="theme-desc">大模型分布式训练推动800G网络升级，底层25.6T高端以太网交换芯片加速国产替代进程。</p>
+  <div class="theme-stocks"><span class="chip">盛科通信-U</span></div>
+</div>
+<div class="theme-card">
+  <div class="theme-header">
+    <span class="strength-dot strength-weak"></span>
+    <span class="theme-name">AI算力航改燃发电</span>
+    <span class="theme-count">1只</span>
+    <span class="theme-strength-label">弱</span>
+  </div>
+  <p class="theme-desc">AI数据中心严重缺电催生退役航空发动机改装燃气轮机需求，打开主机厂商用百亿级新市场。</p>
+  <div class="theme-stocks"><span class="chip">航发动力</span></div>
+</div>
+</section>
+<section class="stocks-detail">
+<h2>个股分析</h2>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">宁波港</span>
+    <span class="stock-code">601018</span>
+    <span class="stock-sector">港口货物吞吐与集装箱装卸</span>
+    <span class="driver-tag driver-performance">业绩驱动</span>
+    <span class="logic-score" title="逻辑硬度 4/5">★★★★☆</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>公司是浙江省沿海港口的运营主体，主要负责宁波舟山港、温州港、嘉兴港等港口的运营管理。主营集装箱、铁矿、原油等货物装卸及综合性港口物流服务，其核心资产宁波舟山港年集装箱吞吐量已突破4000万标准箱，稳居全球前列。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>近期股价在4.13元附近震荡企稳，受1-2月吞吐量超预期双增及2025年业绩创历史新高利好刺激，底部资金承接力度增强，呈现稳步修复态势。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>2026年2月集装箱吞吐量同比大增28.42%</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>1. 核心业务量价齐升：2026年1-2月集装箱与货物吞吐量实现双位数强劲增长，印证外贸进出口景气度回升及港口物流强劲复苏。2. 盈利中枢上移与红利属性：2025年归母净利润首破50亿元大关，业绩确定性强，在当前市场环境下其高股息和红利防御属性对避险资金具备较强吸引力。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年3月3日公告，2月份预计完成集装箱吞吐量432万标准箱，同比增长28.42%；预计完成货物吞吐量9500万吨，同比增长18.35%。</li>
+    <li>2026年2月3日公告，1月份预计完成集装箱吞吐量503万标准箱，同比增长9.5%；预计完成货物吞吐量11200万吨，同比增长4.8%。</li>
+    <li>2026年1月24日发布2025年度业绩快报，全年实现营业总收入310.59亿元，归母净利润达到51.68亿元，首次突破50亿元大关。</li>
+    <li>2026年3月6日发布关于全资子公司向关联方续借款项暨关联交易的公告。</li>
+    <li>2026年2月5日发布关于聘任公司副总经理的公告。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年全年实现营业总收入310.59亿元；归母净利润51.68亿元，历史首次突破50亿元大关。2026年1-2月累计预计完成集装箱吞吐量935万标准箱（同比增约17.76%），货物吞吐量20700万吨（同比增约10.74%）。</div>
+  <div class="stock-outlook"><span class="label">展望</span>后市整体偏向乐观，外贸回暖及港口资源整合将继续支撑公司业绩稳健增长，其红利资产属性具备较高配置价值。但需警惕地缘政治冲突对国际航运物流链的潜在干扰，以及全球宏观经济复苏不及预期导致的外贸需求回落风险。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">成都银行</span>
+    <span class="stock-code">601838</span>
+    <span class="stock-sector">川渝地区城商行</span>
+    <span class="driver-tag driver-performance">业绩驱动</span>
+    <span class="logic-score" title="逻辑硬度 4/5">★★★★☆</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>成都银行是四川省首家上市银行及全国第8家A股上市城商行，深耕成渝地区双城经济圈。公司以对公政务及基建类贷款为核心特色，资产质量和盈利能力长期位居上市城商行第一梯队。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>近期股价在16.9元附近高位震荡，总市值约716亿元，动态市盈率仅5.3倍左右，交投保持活跃，高股息特征吸引长线资金持续配置。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>80亿可转债完成强赎转股，注册资本增至42.38亿</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>1. 资本补充落地：80亿元&#x27;成银转债&#x27;以99.94%的转股率完成强赎退市，极大补充了核心一级资本，打破了规模扩张的资本瓶颈。2. 区域红利持续：深耕成渝双城经济圈，受益于地方基建与实体经济发力，对公贷款保持双位数高增。3. 资产质量优异：不良率仅0.68%，超430%的拨备覆盖率赋予了公司极强的利润反哺能力与抗风险护城河。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年3月7日，公告收到四川金融监管局批复，同意注册资本由37.36亿元增加至42.38亿元。</li>
+    <li>2026年2月6日，&#x27;成银转债&#x27;提前赎回并在上交所摘牌，累计转股数量超6.26亿股，转股率高达99.94%。</li>
+    <li>2026年2月14日，披露投资者关系活动记录表，显示公司近期接待了46家机构的密集调研。</li>
+    <li>2026年1月27日，发布首次公开发行部分限售股解禁上市流通的公告。</li>
+    <li>2025年10月披露三季报，前三季度实现归母净利润94.93亿元，同比增长5.03%，总资产规模突破1.39万亿元。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年前三季度，公司实现营业收入177.61亿元（同比+3.01%），归母净利润94.93亿元（同比+5.03%）。截至2025年三季度末，总资产达1.39万亿元（较上年末+10.81%），不良贷款率0.68%，拨备覆盖率433.08%，加权平均净资产收益率(ROE)达11.40%。</div>
+  <div class="stock-outlook"><span class="label">展望</span>后市展望偏向乐观。看多方面，转股完成后资本约束解除，叠加高股息和低估值（PB约0.8倍）优势，在红利资产逻辑下极具配置价值；看空方面，需警惕宏观利率中枢下行带来的净息差进一步收窄压力，以及地方化债推进对高收益城投类资产规模的潜在挤压。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">华夏银行</span>
+    <span class="stock-code">600015</span>
+    <span class="stock-sector">全国性股份制商业银行</span>
+    <span class="driver-tag driver-policy">政策驱动</span>
+    <span class="logic-score" title="逻辑硬度 3/5">★★★☆☆</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>华夏银行是一家全国性股份制商业银行，主要提供企业及个人综合金融服务。作为国内较早上市的银行之一，公司在京津冀、长三角等核心经济圈具有较强的网点布局和业务基础。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>近期股价在6.7元至6.8元区间窄幅震荡，市净率仅约0.35倍，处于长期破净状态，日均换手率维持在0.3%左右的较低水平。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>市值管理新规落地及2025年中期分红实施</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>1. 政策驱动估值修复：作为典型“长期破净股”（PB仅0.35），直接受益于监管层推动的市值管理及破净股估值修复政策。2. 高股息防御属性：当前股息率达5.90%，在低利率环境下具备较强的类固收配置价值，吸引避险资金。3. 资产质量边际改善：不良贷款率降至1.55%，风险持续出清。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年2月13日发布2025年度业绩快报，全年实现营业收入919.14亿元，同比下降5.39%；归母净利润272.00亿元，同比下降1.72%。</li>
+    <li>2026年3月9日发布关于启用新版《华夏银行个人银行结算账户管理协议书》的公告，进一步规范个人账户管理。</li>
+    <li>2026年1月6日发布公告，公司高级管理人员任职资格获国家金融监督管理总局核准。</li>
+    <li>2025年12月31日媒体报道，华夏银行管理层业务分工调整，副行长唐一鸣兼管零售、科技条线，高波、刘彦雷分管金融市场。</li>
+    <li>2025年12月27日发布2025年第二次临时股东会决议公告，审议通过了中期分红及关联交易等相关议案。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年度业绩快报：营业收入919.14亿元（同比-5.39%），归母净利润272.00亿元（同比-1.72%）。截至2025年末，资产总额4.74万亿元（同比+8.25%），不良贷款率1.55%（较上年末下降0.05个百分点），拨备覆盖率143.30%。</div>
+  <div class="stock-outlook"><span class="label">展望</span>后市展望中性偏多。看多因素在于其高达5.90%的股息率和0.35倍的极低市净率，在市值管理政策下具备较强的估值修复空间和防御属性；看空因素在于银行业整体面临息差收窄压力，公司营收与净利润双双下滑，内生增长动能不足。后续需密切关注净息差企稳拐点及资产质量的持续性。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">光迅科技</span>
+    <span class="stock-code">002281</span>
+    <span class="stock-sector">高速光模块与硅光芯片</span>
+    <span class="driver-tag driver-performance">业绩驱动</span>
+    <span class="logic-score" title="逻辑硬度 5/5">★★★★★</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>光迅科技是国内领先的光电子器件、模块和子系统供应商，具备从芯片到器件、模块、子系统的垂直整合能力。公司在数通光器件产品全球排名第五，是国内少有的实现光芯片自给的光通信龙头企业。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>2026年3月10日股价午后拉升封涨停，报86.16元/股创历史新高。近期资金交投活跃，融资融券余额超24亿元，市场关注度极高。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>1.6T硅光模块量产及定增获深交所审核通过</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>核心驱动力来自全球AI算力投资爆发带来的高速光模块（400G/800G/1.6T）需求激增，公司数通业务收入大幅增长。同时，公司自研硅光芯片及1.6T光模块已送样并具备量产能力，叠加低轨卫星商业航天星间激光通信模块的独家卡位优势，打开了全新的估值空间。</div>
+  <div class="stock-expectation-gap"><span class="label">预期差</span>旧定位是传统电信侧光器件及中低速光模块制造商；新定位是AI算力核心标的（高速硅光模块供应商）及商业航天星间通信核心供应商。这一转变意味着公司业务结构从低毛利的电信侧向高毛利的数通侧及特种应用切换，估值体系从传统通信设备股向AI算力成长股重塑。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年3月10日，光迅科技午后迅速拉升封住涨停，报价86.16元/股，创下历史新高，盘中封单超11万手[1.6]。</li>
+    <li>2026年2月26日，公司公告称向特定对象发行股票申请获得深交所审核中心审核通过，后续将报中国证监会注册。</li>
+    <li>2026年2月14日，公司发布定增募集说明书，募投项目将形成武汉基地高速光模块年产能499.20万只（含1.6T光模块）。</li>
+    <li>2025年三季报显示，前三季度公司主营收入85.32亿元，同比上升58.65%；归母净利润7.19亿元，同比上升54.95%。</li>
+    <li>机构研报指出，公司在商业航天领域取得突破，其100Gbps星间激光通信模块具备量产能力，深度绑定中国卫通、星网等核心客户。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年前三季度，公司实现主营收入85.32亿元，同比上升58.65%；归母净利润7.19亿元，同比上升54.95%。其中第三季度单季营收32.89亿元，同比上升45.01%，单季归母净利润3.47亿元，同比上升35.42%，毛利率为23.14%。</div>
+  <div class="stock-outlook"><span class="label">展望</span>后市看多因素在于AI大模型迭代推动1.6T光模块在2026年进入规模商用期，公司硅光技术降本增效优势显著，且商业航天订单有望贡献显著增量。看空风险在于1.6T光模块行业竞争加剧导致毛利率承压，以及海外AI算力资本开支若不及预期将直接影响公司数通产品出货量。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">广合科技</span>
+    <span class="stock-code">001389</span>
+    <span class="stock-sector">AI算力服务器PCB</span>
+    <span class="driver-tag driver-performance">业绩驱动</span>
+    <span class="logic-score" title="逻辑硬度 5/5">★★★★★</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>广合科技（001389.SZ）是国内领先的印制电路板（PCB）制造商，主营业务聚焦于多高层印制电路板的研发与生产。公司是中国内资PCB企业中排名第一的服务器PCB供应商，产品广泛应用于AI服务器、数据中心及云计算等核心算力场景。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>截至2026年3月上旬，公司股价在105-120元区间高位震荡，总市值稳定在450亿元以上。近期受H股上市聆讯通过及2025年业绩大增双重利好刺激，资金交投活跃。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>2025年净利10.16亿创历史新高，且通过港交所H股上市聆讯。</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>核心驱动力来自全球AI算力基础设施建设带来的服务器PCB需求爆发，公司作为内资龙头深度受益。AI服务器对高频高速板、HDI板及超高阶高多层复合基板等高端产品需求提升，优化了公司产品结构并大幅拉升毛利率。此外，公司推进“A+H”双重上市及泰国工厂投产预期，进一步打开了全球化产能布局与业绩成长空间。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年3月3日，公司发布关于刊发境外上市外资股（H股）发行聆讯后资料集的公告，标志着赴港上市取得实质性进展。</li>
+    <li>2026年2月27日，公司披露2025年度未经审计业绩，全年实现营业总收入54.85亿元，净利润达10.16亿元，同比大幅增长。</li>
+    <li>2026年2月27日，公司董事会审议通过《关于确定公司H股全球发售及在香港联合交易所有限公司上市相关事宜的议案》。</li>
+    <li>2026年2月27日，公司发布公告预计2026年度与关联方发生不超过4650万元日常关联交易。</li>
+    <li>2026年1月23日，公司收到中国证监会出具的《关于广州广合科技股份有限公司境外发行上市备案通知书》，H股发行正式获证监会备案确认。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年度未经审计财务数据显示，公司实现营业总收入54.85亿元（较2024年37.34亿元同比增长约46.9%），实现净利润10.16亿元（较2024年6.76亿元同比增长约50.3%）。高毛利的外销产品及AI算力场景PCB收入占比增加是业绩大增的核心原因。</div>
+  <div class="stock-outlook"><span class="label">展望</span>看多方面，全球AI服务器资本开支维持高位，公司作为内资服务器PCB龙头将持续享受行业红利，泰国工厂产能释放将进一步增厚业绩。看空方面需警惕应收账款规模攀升带来的坏账风险，以及H股发行可能带来的短期估值波动与资金分流压力。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">盛科通信-U</span>
+    <span class="stock-code">688702</span>
+    <span class="stock-sector">数据中心以太网交换芯片</span>
+    <span class="driver-tag driver-tech">技术突破</span>
+    <span class="logic-score" title="逻辑硬度 3/5">★★★☆☆</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>盛科通信是国内领先的以太网交换芯片及配套产品供应商，主营业务为以太网交换芯片及模组的研发与销售。公司打破了博通等海外巨头的垄断，在中国商用以太网交换芯片境内厂商中排名第一，是国内算力网络建设的核心底层芯片标的。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>近期股价在190-200元区间高位震荡（截至2026年3月上旬），交投活跃。3月上旬融资余额突破7.2亿元，处于近一年高位，资金对算力国产替代逻辑博弈激烈。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>AI智算中心建设加速及25.6T高端交换芯片Arctic系列推进落地</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>1. AI算力网络需求爆发：大模型分布式训练推动数据中心交换机向800G升级，拉动底层高速交换芯片需求。2. 核心技术国产替代：全球高端交换芯片被博通等垄断，公司作为国内稀缺龙头，其对标国际先进水平的25.6Tbps芯片承载着极高的国产替代与份额提升预期。</div>
+  <div class="stock-expectation-gap"><span class="label">预期差</span>旧定位是“传统企业网与运营商网络交换芯片供应商” → 新定位是“AI智算中心与算力网络核心底层芯片供应商”。这个转变意味着公司的估值体系从传统的通信设备元器件切换为AI算力基础设施的核心标的，极大打开了在超大规模数据中心和800G高速交换领域的成长与估值空间。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年2月25日，公司发布2025年度业绩快报，全年实现营业收入11.51亿元，同比增长6.35%。</li>
+    <li>2026年2月25日，业绩快报披露2025年归母净利润亏损约1.5亿元，较上年同期亏损增加8158万元，主要系持续高强度研发投入所致。</li>
+    <li>2026年3月9日，盛科通信单日获融资买入1.94亿元，融资余额合计达7.24亿元，占流通市值的1.86%，处于近一年90%分位以上的高位。</li>
+    <li>2026年2月7日，上交所披露中金公司关于盛科通信2025年度持续督导现场检查报告。</li>
+    <li>2026年1月15日，公司发布2025年年度业绩预告，预计扣非后归母净利润为-2.58亿元至-2.18亿元。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年度业绩快报显示：营业总收入11.51亿元（同比+6.35%）；归母净利润亏损1.5亿元（同比亏损扩大约119.5%）；期末总资产25.34亿元（较期初下降4.81%）；归属于母公司所有者的每股净资产5.44元。</div>
+  <div class="stock-outlook"><span class="label">展望</span>后市看多因素在于AI算力网络扩容和交换芯片国产替代的确定性趋势，公司作为国内稀缺标的享有较高估值溢价。看空因素在于公司持续高研发投入导致短期盈利承压（连续亏损），且高端25.6T芯片若量产进度或客户导入不及预期，将面临估值回调风险。需密切关注高端芯片的商业化落地及大客户订单情况。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">源杰科技</span>
+    <span class="stock-code">688498</span>
+    <span class="stock-sector">数据中心光芯片</span>
+    <span class="driver-tag driver-performance">业绩驱动</span>
+    <span class="logic-score" title="逻辑硬度 5/5">★★★★★</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>源杰科技是国内领先的光芯片IDM全流程供应商，聚焦于高速率光芯片及大功率CW光源的研发与生产。公司在高速光芯片国产替代及硅光/CPO配套光源市场占据核心卡位优势，产品广泛应用于数据中心与电信网络。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>前期受AI算力需求爆发催化，股价曾较发行价大涨超10倍；近期随大盘及科技板块出现高位震荡回调，最新股价在806元附近，交投保持活跃。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>2025年净利1.91亿强势扭亏，且拟发行H股赴港上市推进出海。</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>AI算力需求爆发带动硅光及CPO技术加速渗透，公司作为上游核心的CW大功率光源及高速光芯片供应商，深度受益于数据中心光模块的放量。2025年数据中心业务占比大幅提升且毛利率较高，成功兑现了“AI算力带动光芯片需求”的产业逻辑。此外，公司筹划赴港H股IPO，有助于搭建国际资本平台并拓展海外大客户。</div>
+  <div class="stock-expectation-gap"><span class="label">预期差</span>旧定位是受电信周期影响较大的传统光纤入户低速率光芯片供应商；新定位是AI算力网络核心的高速光芯片及硅光CPO配套大功率CW光源供应商。这一转变意味着公司的估值体系从周期波动的电信设备上游，切换为高成长、高壁垒的AI算力核心标的，打开了伴随全球AI算力军备竞赛的长期成长空间。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年3月8日，公司公告拟在境外发行H股，并申请于港交所主板上市，以推进国际化战略及全球化布局。</li>
+    <li>2026年2月28日，披露2025年度业绩快报，全年实现营业总收入6.01亿元，同比大幅增长138.50%。</li>
+    <li>2026年2月28日，业绩快报显示2025年归母净利润达1.91亿元，较上年同期的亏损状态实现强势扭亏为盈。</li>
+    <li>2026年1月29日，发布2025年业绩预告，明确指出数据中心CW光源产品销售额大幅增长及毛利率提升是扭亏主因。</li>
+    <li>2026年3月初，行业研报指出英伟达加码光互联及CPO方案持续推进，源杰科技作为核心标的持续受益于1.6T光通讯超级周期。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>根据2025年度业绩快报，公司2025年实现营业总收入6.01亿元，同比增长138.50%；归母净利润1.91亿元（上年同期为亏损613.39万元），扣非净利润亦由负转正。业绩大幅增长主要系数据中心领域CW光源产品销售额大幅增长且毛利率较高所致。</div>
+  <div class="stock-outlook"><span class="label">展望</span>后市持续看多AI大模型迭代及1.6T光模块换代周期对高速光芯片与CW光源需求的拉动，公司赴港上市有望加速海外大客户导入。但也需警惕短期股价累计涨幅过大带来的估值消化压力，以及硅光技术路线演进带来的技术迭代风险。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">德明利</span>
+    <span class="stock-code">001309</span>
+    <span class="stock-sector">企业级固态硬盘与AI终端存储</span>
+    <span class="driver-tag driver-performance">业绩驱动</span>
+    <span class="logic-score" title="逻辑硬度 5/5">★★★★★</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>德明利是国内闪存主控芯片及存储模组龙头，主攻存储主控芯片自研与定制化全链路存储解决方案。公司产品涵盖固态硬盘、嵌入式存储等，目前正加速向企业级存储和AI终端存储方案商转型，行业地位稳固。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>近期受存储芯片涨价及AI算力需求爆发催化，股价表现强势，3月初曾录得涨停，市场资金交投活跃。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>2025年营收首破百亿且Q4净利暴增超10倍</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>1. AI算力与终端需求爆发：AI服务器及AIPC/AI手机带动企业级SSD和嵌入式存储需求激增。2. 存储周期反转与涨价：2025年下半年起存储价格进入上行通道，公司毛利率大幅改善。3. 战略备货与产品升级：超70亿元的低成本存货叠加向企业级市场的成功拓展，释放巨大业绩弹性。</div>
+  <div class="stock-expectation-gap"><span class="label">预期差</span>旧定位是“消费级移动存储模组厂”，新定位是“企业级存储方案商及AI终端存储核心供应商”。这一转变意味着公司摆脱了低毛利周期性组装厂的标签，凭借自研主控芯片和企业级大客户的突破，盈利结构发生根本性改变，估值体系有望向高成长科技股切换。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年2月27日发布2025年年报，全年营收107.89亿元，同比增长126.07%；归母净利润6.88亿元，同比增长96.35%。</li>
+    <li>2025年第四季度单季归母净利润达7.15亿元，同比暴增超1100%，成为全年盈利绝对主力。</li>
+    <li>2026年3月4日，受存储芯片涨价及AI算力需求爆发催化，德明利股价强势涨停（10%）。</li>
+    <li>公司嵌入式存储营收占比超三成，LPDDR4X/5/5X产品已实现量产出货，全面适配AI终端需求。</li>
+    <li>公司发布利润分配预案，拟向全体股东每10股派发现金红利4元（含税）。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年全年营收107.89亿元（同比+126.07%），归母净利润6.88亿元（同比+96.35%）。2025年四季度单季盈利7.15亿元，全年毛利率回升至14.81%（前三季度仅7.16%），存货规模超70亿元。</div>
+  <div class="stock-outlook"><span class="label">展望</span>看多方面，AI服务器及端侧AI对大容量存储需求持续爆发，叠加公司巨额低价存货，利润弹性有望在2026年继续释放。看空方面，存储芯片属强周期行业，需警惕原厂产能恢复导致价格回落风险，以及高企的有息负债带来的财务压力。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">航发动力</span>
+    <span class="stock-code">600893</span>
+    <span class="stock-sector">航空发动机及航改燃气轮机制造</span>
+    <span class="driver-tag driver-tech">技术突破</span>
+    <span class="logic-score" title="逻辑硬度 3/5">★★★☆☆</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>中国航发动力股份有限公司是国内唯一能够研制全谱系航空发动机的主机厂，被誉为中国航空发动机产业的“国家队”。主营业务涵盖航空发动机及衍生产品（燃气轮机）的研发、制造与维修，在军用航空动力领域处于绝对垄断地位。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>近期股价在2026年2月中旬因“航改燃”及低空经济概念催化出现连续涨停，随后维持高位震荡，截至2026年3月上旬股价在60元左右，成交量显著放大。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>AI算力催生航改燃百亿需求及AES100获低空经济订单</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>1. 航改燃气轮机切入AI基建：全球AI数据中心面临严重缺电，公司作为国内唯一航发主机厂，将退役航发改装为燃气轮机，交付快且部署灵活，打开商用百亿级新市场。2. 低空经济与民机双轮驱动：公司研制的AES100发动机获低空经济意向订单，叠加C919大飞机国产发动机加速适航，民用市场的高毛利将大幅改善盈利结构。</div>
+  <div class="stock-expectation-gap"><span class="label">预期差</span>旧定位是受制于军费预算和长周期回款的“纯军用航空发动机制造商”；新定位是赋能AI算力基建的“航改燃气轮机供应商”及“低空经济核心动力龙头”。这一转变意味着公司的估值体系将从传统的军工周期股向具备全球视野的AI能源基建与低空成长股切换，彻底打开了商用市场的成长空间并有望大幅提升盈利水平。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年2月13日，受AI算力中心缺电引发的“航改燃”逻辑催化，航发动力股价强势涨停，机构测算改造100台航发市场空间可超百亿。</li>
+    <li>2026年2月10日，市场热炒公司在航展签署的AES100发动机意向订单，该型号与低空经济深度绑定，引发民用价值重估。</li>
+    <li>2026年1月17日，公司发布2026年第一次临时股东会决议公告，审议通过了2026年度对全资子公司担保预计及提供委托贷款等议案。</li>
+    <li>2025年12月31日，公司公告中国航发湖南动力机械研究所等拟以所持无形资产所有权出资，推进相关资产评估与产业布局优化。</li>
+    <li>2025年10月30日，公司发布2025年三季报，前三季度实现营收229.12亿元（同比-11.73%），归母净利润1.08亿元（同比大幅下降85.13%）。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年前三季度实现营业收入229.12亿元，同比下降11.73%；归母净利润仅为1.08亿元，同比大幅下降85.13%。业绩承压主要系军品客户需求阶段性波动、产品降价及长周期回款导致的财务费用增加所致。</div>
+  <div class="stock-outlook"><span class="label">展望</span>看多方面，AI算力中心“航改燃”需求爆发及低空经济订单落地，有望为公司带来高毛利的第二增长曲线，扭转军品降价颓势。看空方面，军工行业整体面临降本增效压力，且“航改燃”及民用订单从意向到实际利润兑现周期较长，短期内2025年糟糕的财务数据可能制约股价的持续上行空间。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">恩捷股份</span>
+    <span class="stock-code">002812</span>
+    <span class="stock-sector">固态电池电解质及隔膜</span>
+    <span class="driver-tag driver-merger">并购重组</span>
+    <span class="logic-score" title="逻辑硬度 4/5">★★★★☆</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>公司是全球领先的锂电池湿法隔膜供应商，市场份额连续多年位居全球第一。近年来公司积极向固态电池核心材料领域转型，深度布局硫化物固态电解质及电解质膜等前沿技术。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>近期股价在66元附近企稳反弹，受2025年业绩扭亏及固态电池产业化加速催化，资金关注度显著提升，成交量温和放大。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>拟全资收购中科华联切入核心设备，且2025年业绩成功扭亏为盈。</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>1. 并购重组打通上下游：拟发行股份全资收购中科华联，向固态电池整线装备领域延伸，构建“材料+设备”护城河。2. 业绩触底反转：受益于四季度隔膜销量增长及价格企稳，2025年预计盈利1.09亿-1.64亿元。3. 固态技术卡位：10吨级硫化物固态电解质中试线推进，并与国轩高科等绑定，抢占下一代技术高地。</div>
+  <div class="stock-expectation-gap"><span class="label">预期差</span>旧定位是“传统湿法锂电池隔膜龙头”，深陷产能过剩与价格战泥潭，估值受压；新定位是“全固态电池核心材料（硫化物电解质）及装备集成商”。这一转变意味着公司有望摆脱传统隔膜的周期性内卷，凭借在固态电解质膜和上游设备的垂直整合，重塑高毛利的成长股估值体系。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年3月7日，公司发布关于发行股份购买资产（青岛中科华联100%股权）并募集配套资金的进展公告 [1.6]。</li>
+    <li>2026年1月29日，发布2025年度业绩预告，预计全年归母净利润1.09亿元至1.64亿元，同比大幅扭亏为盈。</li>
+    <li>2026年1月，公司先后与恩力动力、国轩高科签署战略合作协议，聚焦固态电池电解质及隔膜的技术协同与开发。</li>
+    <li>2026年1月7日，公司完成名称变更登记，全称正式变更为“云南恩捷新材料（集团）股份有限公司”。</li>
+    <li>2025年12月，公司硫化物固态电解质10吨级中试产线进入设备调试阶段，加速固态电池材料量产进程。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年前三季度实现营收95.43亿元（同比+27.85%），归母净利润亏损8632万元；受益于四季度量价齐升，2025年全年预计实现归母净利润1.09亿元至1.64亿元，较2024年亏损5.56亿元实现大幅扭亏为盈。</div>
+  <div class="stock-outlook"><span class="label">展望</span>后市持续看多固态电池产业化加速及收购中科华联带来的产业链协同降本效应。但需警惕传统湿法隔膜行业价格战余波反复，以及固态电解质规模化量产订单不及预期的风险，短期重点关注重组落地进展。</div>
+</div>
+<div class="stock-card">
+  <div class="stock-header">
+    <span class="stock-name">新和成</span>
+    <span class="stock-code">002001</span>
+    <span class="stock-sector">饲料级维生素与蛋氨酸</span>
+    <span class="driver-tag driver-performance">业绩驱动</span>
+    <span class="logic-score" title="逻辑硬度 5/5">★★★★★</span>
+  </div>
+  <div class="stock-reason"><span class="label">公司简介</span>新和成是全球领先的精细化工龙头，主营营养品、香精香料及特种新材料。公司在维生素A和维生素E领域市占率位居全球前列，同时也是全球前三的蛋氨酸生产商。</div>
+  <div class="stock-reason"><span class="label">近期表现</span>近期股价表现极为强势，交投活跃，年内累计涨幅已超过40%。2026年3月初，公司总市值成功突破千亿大关，前复权股价创出历史新高。</div>
+  <div class="stock-catalyst"><span class="label">催化剂</span>2月初维生素出口报价上调15%且市值破千亿</div>
+  <div class="stock-reason"><span class="label">核心驱动</span>首先，行业供给收缩带来量价齐升。受海外巨头复产不及预期及国内环保趋严影响，维生素供给偏紧，公司上调出口报价直接增厚利润。其次，新产能与新材料加速放量。18万吨液体蛋氨酸项目投产巩固龙头地位，天津尼龙66项目全面建设打开了第二增长曲线。</div>
+  <div class="stock-news"><span class="label">近期要闻</span><ul>
+    <li>2026年3月3日，新和成股价收涨4.28%，总市值达到1042亿元，正式跻身A股千亿市值俱乐部。</li>
+    <li>2026年2月初，公司将饲料级维生素出口报价上调15%，进一步强化了市场对其盈利增长的预期。</li>
+    <li>2026年2月，公司位于天津的尼龙66项目取得施工许可，标志着首个自主技术项目进入全面建设阶段。</li>
+    <li>2026年3月报道，公司在山东潍坊累计投资约200亿元，并已启动占地约千亩的新香料产业园区规划。</li>
+    <li>2025年10月28日发布三季报，前三季度实现营业收入166.42亿元（同比+5.45%），归母净利润53.21亿元（同比+33.37%）。</li>
+  </ul></div>
+  <div class="stock-reason"><span class="label">财务要点</span>2025年前三季度实现营收166.42亿元（同比+5.45%），归母净利润53.21亿元（同比+33.37%），毛利率高达45.55%。2024年全年归母净利润达58.69亿元（同比+117.01%），业绩呈现爆发式增长且盈利韧性极强。</div>
+  <div class="stock-outlook"><span class="label">展望</span>后市展望偏乐观，公司凭借&#x27;低估值+高盈利&#x27;的优势有望持续吸引长线资金，触发戴维斯双击。看多因素在于维生素高景气延续及蛋氨酸、尼龙66等新产能释放；看空因素则需警惕海外巨头产能恢复导致产品价格回落，以及潜在的出口关税壁垒风险。</div>
+</div>
+</section>
+<footer>
+  <p>本报告由 AI 自动生成，仅供参考，不构成投资建议。</p>
+</footer>
+</div>
+</body>
+</html>
